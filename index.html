@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merlin｜GodiVanLife</title>
+
+<style>
+:root {
+    --main: #4facfe;
+    --accent: #00f2fe;
+    --ball: #ffcc00;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'PingFang TC','Microsoft JhengHei',sans-serif;
+    background: linear-gradient(135deg,var(--main),var(--accent));
+    text-align: center;
+    color: white;
+}
+
+.container {
+    max-width: 420px;
+    margin: auto;
+    background: white;
+    color: #333;
+    padding: 28px;
+    border-radius: 35px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 6px solid var(--ball);
+    object-fit: cover;
+    margin-bottom: 15px;
+    animation: bounce 3s infinite;
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+h1 {
+    margin: 10px 0;
+    font-size: 28px;
+    color: var(--main);
+}
+
+.tagline {
+    color: #777;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.ball {
+    width: 25px;
+    height: 25px;
+    background: var(--ball);
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 4s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+}
+
+.info-card {
+    background: #f4f9ff;
+    padding: 18px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 30px;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.btn-call {
+    background: var(--main);
+}
+
+.btn-call:hover {
+    background: var(--accent);
+}
+
+.btn-sms {
+    background: #28a745;
+}
+
+.btn-sms:hover {
+    background: #1e7e34;
+}
+
+.instagram-link {
+    display: block;
+    margin-top: 15px;
+    padding: 12px;
+    background: linear-gradient(45deg,#f09433,#dc2743,#bc1888);
+    color: white;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 25px;
+    font-size: 11px;
+    color: #ccc;
+    letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="ball"></div>
+
+<img src="images/merlin.jpg" alt="Merlin" class="profile-img">
+
+<h1>Merlin</h1>
+<p class="tagline">GodiVanLife 智慧守護系統</p>
+
+<div class="info-card">
+    <strong>⚽ 特色：</strong>超級愛玩球！<br>
+    請拿球吸引他 😆
+</div>
+
+<button class="btn btn-sms" onclick="sendSMSLocation()">
+📍 即時定位通報
+</button>
+
+<a href="tel:0958133128" class="btn btn-call">
+📞 撥打主人 1
+</a>
+
+<a href="tel:0987206560" class="btn btn-call">
+📞 撥打主人 2
+</a>
+
+<a href="https://www.instagram.com/merlin.1127/" target="_blank" class="instagram-link">
+看 Merlin 的 IG 📸
+</a>
+
+<footer>
+POWERED BY GODIVANLIFE
+</footer>
+
+</div>
+
+<script>
+function sendSMSLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const mapUrl = "https://www.google.com/maps?q=" + lat + "," + lng;
+            const message = encodeURIComponent("【尋寵通報】我發現 Merlin！目前位置：" + mapUrl);
+            window.location.href = "sms:0958133128?body=" + message;
+        });
+    } else {
+        window.location.href = "sms:0958133128?body=" + 
+        encodeURIComponent("【尋寵通報】我發現 Merlin，請與我聯繫。");
+    }
+}
+</script>
+
+</body>
+</html>
